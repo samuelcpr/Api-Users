@@ -39,6 +39,25 @@ class UsuarioController {
     usuarios.splice(index, 1);
     return res.sendStatus(204);
   }
+
+  static atualizarUsuario(req, res) {
+    const id = parseInt(req.params.id);
+    const { nome, email } = req.body;
+  
+    // Encontre o usuário pelo ID no array "usuarios"
+    const usuario = usuarios.find((usuario) => usuario.id === id);
+  
+    // Verifique se o usuário foi encontrado
+    if (!usuario) {
+      return res.status(404).json({ error: 'Usuário não encontrado.' });
+    }
+  
+    // Atualize as propriedades do usuário com os novos valores usando Object.assign()
+    Object.assign(usuario, { nome, email });
+  
+    // Retorne o usuário atualizado
+    return res.json(usuario);
+  }
 }
 
 module.exports = UsuarioController;

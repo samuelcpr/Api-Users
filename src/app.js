@@ -10,7 +10,7 @@ app.use(express.json());
 // Definir as rotas da API
 app.use('/usuarios', usuarioRoutes);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3333;
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 });

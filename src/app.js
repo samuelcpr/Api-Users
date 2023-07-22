@@ -1,11 +1,16 @@
 const express = require('express');
+const cors = require('cors'); // Importe o pacote cors
+
 const app = express();
 
-// Importar as rotas da API
-const usuarioRoutes = require('./routes/usuarioRoutes');
+// Configurar o middleware cors para permitir solicitações de qualquer origem
+app.use(cors());
 
 // Configurar o middleware para o uso de JSON nas requisições
 app.use(express.json());
+
+// Importar as rotas da API
+const usuarioRoutes = require('./routes/usuarioRoutes');
 
 // Definir as rotas da API
 app.use('/usuarios', usuarioRoutes);

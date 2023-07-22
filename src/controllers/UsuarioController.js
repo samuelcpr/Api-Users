@@ -52,8 +52,9 @@ class UsuarioController {
       return res.status(404).json({ error: 'Usuário não encontrado.' });
     }
   
-    // Atualize as propriedades do usuário com os novos valores usando Object.assign()
-    Object.assign(usuario, { nome, email });
+    // Atualize as propriedades do usuário com os novos valores
+    usuario.nome = nome;
+    usuario.email = email;
   
     // Retorne o usuário atualizado
     return res.json(usuario);

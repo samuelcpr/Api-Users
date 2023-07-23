@@ -4,10 +4,10 @@ const usuarios = [];
 
 class UsuarioController {
   static criarUsuario(req, res) {
-    const { nome, email } = req.body;
+    const { nome, email, senha } = req.body;
     const id = usuarios.length + 1;
 
-    const novoUsuario = new Usuario(id, nome, email);
+    const novoUsuario = new Usuario(id, nome, email, senha);
     usuarios.push(novoUsuario);
 
     return res.status(201).json(novoUsuario);
@@ -43,21 +43,31 @@ class UsuarioController {
   static atualizarUsuario(req, res) {
     const id = parseInt(req.params.id);
     const { nome, email } = req.body;
-  
-    // Encontre o usuário pelo ID no array "usuarios"
+
     const usuario = usuarios.find((usuario) => usuario.id === id);
-  
-    // Verifique se o usuário foi encontrado
     if (!usuario) {
       return res.status(404).json({ error: 'Usuário não encontrado.' });
     }
-  
-    // Atualize as propriedades do usuário com os novos valores
+
     usuario.nome = nome;
     usuario.email = email;
-  
-    // Retorne o usuário atualizado
+
     return res.json(usuario);
+  }
+
+  static loginUsuario(req, res) {
+    const { email, senha } = req.body;
+
+    const usuario = usuarios.find((usuario) => usuario.email === email);
+    if (!usuario) {
+      return res.status(404).json({ error: 'Usuário não encontrado.' });
+    }
+
+    if (!usuario.verificarSenha(senha)) {
+      return res.status(401).json({ error: 'Senha incorreta.' });
+    }
+
+    return res.json({ message: 'Login bem-sucedido.' });
   }
 }
 

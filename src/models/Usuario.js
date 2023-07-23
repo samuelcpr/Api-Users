@@ -1,10 +1,23 @@
+const bcrypt = require('bcrypt');
+
 class Usuario {
-    constructor(id, nome, email) {
-      this.id = id;
-      this.nome = nome;
-      this.email = email;
-    }
+  constructor(id, nome, email, senha) {
+    this.id = id;
+    this.nome = nome;
+    this.email = email;
+    this.senha = this.criptografarSenha(senha); // Armazena a senha criptografada
   }
-  
-  module.exports = Usuario;
-  
+
+  // Método para criar o hash da senha
+  criptografarSenha(senha) {
+    const saltRounds = 10;
+    return bcrypt.hashSync(senha, saltRounds);
+  }
+
+  // Método para verificar se a senha fornecida corresponde ao hash da senha armazenada
+  verificarSenha(senha) {
+    return bcrypt.compareSync(senha, this.senha);
+  }
+}
+
+module.exports = Usuario;

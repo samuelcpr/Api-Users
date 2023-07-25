@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './style.css';
 
-const CadastroUsuario = () => {
+const CadastroUsuarioForm = () => {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
@@ -17,6 +18,7 @@ const CadastroUsuario = () => {
     };
 
     try {
+      // Substitua 'URL_DA_SUA_API' pela rota correta da sua API que recebe os dados do formulário.
       const response = await axios.post('http://localhost:3333/usuarios', usuario);
       setMensagem('Usuário criado com sucesso.');
       setNome('');
@@ -32,46 +34,56 @@ const CadastroUsuario = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="nome">Nome:</label>
-          <input
-            type="text"
-            id="nome"
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
-            placeholder="Digite o nome"
-            required
-          />
+    <div className="container-main">
+      <div className="container">
+        <form className="formulario" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="nome">Nome:</label>
+            <input
+              type="text"
+              id="nome"
+              value={nome}
+              onChange={(e) => setNome(e.target.value)}
+              placeholder="Digite o seu nome"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="email">E-mail:</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Digite o seu e-mail"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="senha">Senha:</label>
+            <input
+              type="password"
+              id="senha"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+              placeholder="Digite a sua senha"
+              required
+            />
+          </div>
+          <button type="submit">Enviar</button>
+        </form>
+        {mensagem && <p className="mensagem">{mensagem}</p>}
+        <div className="link-container">
+          <a href="#" className="link-facebook">
+            Conecte-se com o Facebook
+          </a>
+          <a href="#" className="link-login">
+            Já tem uma conta? Faça login aqui.
+          </a>
         </div>
-        <div>
-          <label htmlFor="email">E-mail:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Digite o e-mail"
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="senha">Senha:</label>
-          <input
-            type="password"
-            id="senha"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-            placeholder="Digite a senha"
-            required
-          />
-        </div>
-        <button type="submit">Criar Usuário</button>
-      </form>
-      {mensagem && <p>{mensagem}</p>}
+      </div>
     </div>
   );
 };
 
-export default CadastroUsuario;
+export default CadastroUsuarioForm;

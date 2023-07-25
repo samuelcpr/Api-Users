@@ -68,7 +68,7 @@ const LoginForm = () => {
         <div className="mt-3 text-danger text-center">{mensagemErro}</div>
       )}
       <div id='link-login'>
-        <a href='http://localhost:3000/cadastro?' >Cadastre-se</a>
+        <a href='http://localhost:3000/cadastro?' id="text-footer">Cadastre-se aqui</a>
       </div>
     </form>
   );

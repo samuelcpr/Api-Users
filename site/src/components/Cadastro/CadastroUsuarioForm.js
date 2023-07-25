@@ -24,6 +24,9 @@ const CadastroUsuarioForm = () => {
       setNome('');
       setEmail('');
       setSenha('');
+      
+      // Redireciona para a página de login após criar o usuário
+      window.location.href = 'http://localhost:3000/login';
     } catch (error) {
       if (error.response) {
         setMensagem('Erro ao criar usuário: ' + error.response.data.error);
@@ -74,9 +77,6 @@ const CadastroUsuarioForm = () => {
         </form>
         {mensagem && <p className="mensagem">{mensagem}</p>}
         <div className="link-container">
-          <a href="#" className="link-facebook">
-            Conecte-se com o Github
-          </a>
           <a href="http://localhost:3000/login" className="link-login">
             Já tem uma conta? Faça login aqui.
           </a>

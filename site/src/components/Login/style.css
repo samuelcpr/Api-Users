@@ -109,10 +109,19 @@
   
   #link-login{
     margin-top: 5% !important;
+    display: flex;
+    justify-content: center;
     
   }
 
-  #link-login, a{
-    text-decoration: none;
-    color: #115293;
+  #text-footer{
+    text-decoration: none !important;
+    color: #1877f2;
   }
+
+  #text-footer:hover{
+    text-decoration: underline !important;
+    color: #1877f2;
+   
+  }
+  

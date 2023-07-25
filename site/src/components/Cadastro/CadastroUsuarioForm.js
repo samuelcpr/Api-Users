@@ -77,7 +77,7 @@ const CadastroUsuarioForm = () => {
           <a href="#" className="link-facebook">
             Conecte-se com o Github
           </a>
-          <a href="#" className="link-login">
+          <a href="http://localhost:3000/login" className="link-login">
             Já tem uma conta? Faça login aqui.
           </a>
         </div>

@@ -75,7 +75,7 @@ const CadastroUsuarioForm = () => {
         {mensagem && <p className="mensagem">{mensagem}</p>}
         <div className="link-container">
           <a href="#" className="link-facebook">
-            Conecte-se com o Facebook
+            Conecte-se com o Github
           </a>
           <a href="#" className="link-login">
             Já tem uma conta? Faça login aqui.

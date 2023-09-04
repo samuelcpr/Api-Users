@@ -1,16 +1,27 @@
 import React from 'react';
-import { AiOutlineBook, AiOutlineComment, AiOutlineUser, AiOutlineDashboard, AiOutlineSupport } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import { AiOutlineBook, AiOutlineComment, AiOutlineUser, AiOutlineDashboard, AiOutlineRight } from 'react-icons/ai';
+import './style/sidebar.css';
 
 const Sidebar = () => {
   return (
     <aside>
       <nav>
-        <Link to="/">Curso</Link>
-        <Link to="/contact">Fale com a gente</Link>
-        <Link to="/account">Minha Conta</Link>
-        <Link to="/dashboard">Dashboard</Link>
-        <Link to="/support">Suporte</Link>
+        <Link to="/course">
+          <AiOutlineBook /> Curso
+        </Link>
+        <Link to="/contact">
+          <AiOutlineComment /> Fale com a gente
+        </Link>
+        <Link to="/account">
+          <AiOutlineUser /> Minha Conta
+        </Link>
+        <Link to="/dashboard">
+          <AiOutlineDashboard /> Dashboard
+        </Link>
+        <Link to="/support">
+          <AiOutlineRight /> Suporte
+        </Link>
       </nav>
     </aside>
   );

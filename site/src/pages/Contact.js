@@ -1,10 +1,18 @@
 import React from 'react';
+import Sidebar from '../components/Sidebar';
+import './Accout.css'
+
 
 const Contact = () => {
   return (
-    <div>
-      <h2>Fale com a gente</h2>
-      <p>Entre em contato conosco para mais informações.</p>
+    <div id='container'>
+      <h2 id='title'>Fale com a gente</h2>
+      <div id='barra-lateral'>
+        <Sidebar />
+      </div>
+      <div id='conteudo'>
+        <p>isso é um teste </p>
+      </div>
     </div>
   );
 };

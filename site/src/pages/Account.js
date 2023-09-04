@@ -1,10 +1,18 @@
 import React from 'react';
+import Sidebar from '../components/Sidebar';
+import './Accout.css'
+
 
 const Account = () => {
   return (
-    <div>
-      <h2>Minha Conta</h2>
-      <p>Detalhes da conta do usuário aqui.</p>
+    <div id='container'>
+      <h2 id='title'>Minha Conta</h2>
+      <div id='barra-lateral'>
+        <Sidebar />
+      </div>
+      <div id='conteudo'>
+        <p>isso é um teste </p>
+      </div>
     </div>
   );
 };

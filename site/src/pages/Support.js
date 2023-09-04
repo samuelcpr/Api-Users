@@ -1,10 +1,18 @@
 import React from 'react';
+import Sidebar from '../components/Sidebar';
+import './Accout.css'
+
 
 const Support = () => {
   return (
-    <div>
-      <h2>Suporte</h2>
-      <p>Entre em contato com o suporte técnico.</p>
+    <div id='container'>
+      <h2 id='title'>Support</h2>
+      <div id='barra-lateral'>
+        <Sidebar />
+      </div>
+      <div id='conteudo'>
+        <p>isso é um teste </p>
+      </div>
     </div>
   );
 };

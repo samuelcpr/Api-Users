@@ -7,6 +7,10 @@ const Sidebar = () => {
   return (
     <aside>
       <nav>
+
+      <Link to="/dashboard">
+          <AiOutlineDashboard /> Dashboard
+        </Link>
         <Link to="/course">
           <AiOutlineBook /> Curso
         </Link>
@@ -16,9 +20,7 @@ const Sidebar = () => {
         <Link to="/account">
           <AiOutlineUser /> Minha Conta
         </Link>
-        <Link to="/dashboard">
-          <AiOutlineDashboard /> Dashboard
-        </Link>
+       
         <Link to="/support">
           <AiOutlineRight /> Suporte
         </Link>

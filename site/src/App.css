@@ -13,16 +13,23 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* No seu arquivo CSS, por exemplo, App.css */
+
+/* Header.css */
+
+.header {
+  background-color: #000; /* Cor de fundo preta */
+  color: #fff; /* Cor do texto branco para melhor contraste */
+  width: 100%; /* Largura total da página */
+  position: fixed; /* Fixa o cabeçalho na parte superior da página */
+  top: 0; /* Alinha o cabeçalho com o topo da página */
+  left: 0; /* Alinha o cabeçalho com a esquerda da página */
+  z-index: 999; /* Certifique-se de que o cabeçalho esteja na frente de outros elementos */
+  padding: 10px 20px; /* Espaçamento interno */
 }
+
+/* Adicione estilos adicionais ao seu cabeçalho, como fonte, altura, alinhamento, etc. */
+
 
 .App-link {
   color: #61dafb;

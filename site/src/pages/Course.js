@@ -8,26 +8,27 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const Course = () => {
- useEffect(() => {
-  const script = document.createElement('script');
-  script.src = 'https://www.youtube.com/iframe_api';
-  document.head.appendChild(script);
+  const [player, setPlayer] = useState(null);
+  const [selectedAula, setSelectedAula] = useState('Om9v_xB-xGM'); // Initialize with the first video ID
+  const [lessonCompleted, setLessonCompleted] = useState(false);
 
-  script.onload = () => {
-    onYouTubeIframeAPIReady();
-  };
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(script);
 
-  return () => {
-    // Cleanup script on component unmount
-    document.head.removeChild(script);
-  };
-}, []);
+    script.onload = () => {
+      onYouTubeIframeAPIReady();
+    };
 
-  let player;
+    return () => {
+      // Cleanup script on component unmount
+      document.head.removeChild(script);
+    };
+  }, []);
 
   const onYouTubeIframeAPIReady = () => {
-    // Crie uma única instância do player
-    player = new window.YT.Player('player', {
+    const ytPlayer = new window.YT.Player('player', {
       height: '500',
       width: '1000',
       playerVars: {
@@ -40,24 +41,42 @@ const Course = () => {
       },
       events: {
         onReady: onPlayerReady,
+        onStateChange: onPlayerStateChange,
       },
     });
-  };
 
-  const loadYouTubeVideo = (videoId) => {
-    // Altere apenas o vídeo quando necessário
-    player.loadVideoById(videoId);
+    setPlayer(ytPlayer);
   };
 
   const onPlayerReady = (event) => {
-    event.target.playVideo();
-    event.target.setVolume(100);
+    if (player) {
+      event.target.loadVideoById(selectedAula); // Load the initial video
+      event.target.setVolume(100);
+    } else {
+      console.error('Player is not defined');
+    }
+  };
+
+  const onPlayerStateChange = (event) => {
+    if (event.data === 0) {
+      setLessonCompleted(true);
+    }
+  };
+
+  const loadYouTubeVideo = (videoId) => {
+    if (player) {
+      player.loadVideoById(videoId);
+    } else {
+      console.error('Player is not defined');
+    }
   };
 
   const handleAccordionClick = (videoId) => {
-    // Use o videoId diretamente, remova o estado currentVideo
     loadYouTubeVideo(videoId);
+    setSelectedAula(videoId);
+    setLessonCompleted(false); // Reset lesson completion status
   };
+
   return (
     <div id='container'>
       <Menutop />
@@ -83,15 +102,42 @@ const Course = () => {
                 <Typography>
                   <div style={{ display: 'block' }}>
                     <div onClick={() => handleAccordionClick('Om9v_xB-xGM')} style={{ display: 'flex', justifyContent: 'left', alignItems: 'center' }}>
-                      <input type="radio" id="resposta2" name="pergunta2" value="resposta2" style={{ width: '5%' }} />
+                      <input
+                        type="radio"
+                        id={`resposta2_Om9v_xB-xGM`}
+                        name="pergunta2"
+                        value={`resposta2_Om9v_xB-xGM`}
+                        style={{ width: '5%' }}
+                        checked={selectedAula === 'Om9v_xB-xGM'}
+                        onChange={() => {}}
+                        disabled={lessonCompleted}
+                      />
                       <span style={{ padding: '0 0 0 2%' }}>{'Aula 1'}</span>
                     </div>
                     <div onClick={() => handleAccordionClick('7JvQJGCK-GI')} style={{ display: 'flex', justifyContent: 'left', alignItems: 'center' }}>
-                      <input type="radio" id="resposta2" name="pergunta2" value="resposta2" style={{ width: '5%' }} />
+                      <input
+                        type="radio"
+                        id={`resposta2_7JvQJGCK-GI`}
+                        name="pergunta2"
+                        value={`resposta2_7JvQJGCK-GI`}
+                        style={{ width: '5%' }}
+                        checked={selectedAula === '7JvQJGCK-GI'}
+                        onChange={() => {}}
+                        disabled={lessonCompleted}
+                      />
                       <span style={{ padding: '0 0 0 2%' }}>{'Aula 2'}</span>
                     </div>
                     <div onClick={() => handleAccordionClick('kNbTFOlt62Y')} style={{ display: 'flex', justifyContent: 'left', alignItems: 'center' }}>
-                      <input type="radio" id="resposta2" name="pergunta2" value="resposta2" style={{ width: '5%' }} />
+                      <input
+                        type="radio"
+                        id={`resposta2_kNbTFOlt62Y`}
+                        name="pergunta2"
+                        value={`resposta2_kNbTFOlt62Y`}
+                        style={{ width: '5%' }}
+                        checked={selectedAula === 'kNbTFOlt62Y'}
+                        onChange={() => {}}
+                        disabled={lessonCompleted}
+                      />
                       <span style={{ padding: '0 0 0 2%' }}>{'Aula 3'}</span>
                     </div>
                   </div>

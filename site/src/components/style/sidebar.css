@@ -1,28 +1,65 @@
 aside {
-  padding-top: 5%;
-  background-color: #000; /* Cor de fundo preta */
-  color: #fff; /* Cor do texto branco, para melhor contraste */
-  width: 200px; /* Largura do Sidebar */
-  height: 100%; /* Para preencher toda a altura da tela */
-  position: fixed; /* Fixa o Sidebar na posição */
-  top: 0; /* Alinha o Sidebar com o topo */
-  left: 0; /* Alinha o Sidebar com a esquerda */
-  overflow-y: auto; /* Adiciona uma barra de rolagem vertical se necessário */
-  
+  padding-top: 0;
+  background-color: #FFFFFF;
+  /* Cor de fundo preta */
+  /* Cor do texto branco, para melhor contraste */
+  width: 238px;
+  /* Largura do Sidebar */
+  height: 100%;
+  /* Para preencher toda a altura da tela */
+  position: absolute;
+  /* Fixa o Sidebar na posição */
+  top: 0;
+  /* Alinha o Sidebar com o topo */
+  left: 0;
+  /* Alinha o Sidebar com a esquerda */
+  overflow-y: hidden;
+  /* Adiciona uma barra de rolagem vertical se necessário */
+
+
 }
 
 nav {
   display: flex;
-  flex-direction: column; /* Itens empilhados verticalmente */
-  padding: 20px; /* Espaçamento interno */
+  flex-direction: column;
+  /* Itens empilhados verticalmente */
+  padding: 20px;
+  /* Espaçamento interno */
+  z-index: 5 !important;
 }
+
+
 
 nav a {
-  color: #fff; /* Cor do texto dos links branco */
-  text-decoration: none; /* Remover sublinhado dos links */
-  margin-bottom: 10px; /* Espaçamento entre os links */
+  color: #000;
+  font-size: 20px;
+  font-weight: 700;
+  text-decoration: none;
+  /* Remover sublinhado dos links */
+  margin-bottom: 20px;
+  /* Espaçamento entre os links */
+  overflow-y: auto;
+ 
 }
 
-nav a:hover {
-  text-decoration: underline; /* Adicionar sublinhado ao passar o mouse sobre os links */
+
+
+nav a:hover,
+nav a:focus {
+  background-color: #298D5B;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 2px 5px;
+}
+
+/* Estilos para o link ativo */
+nav a.active,
+nav a:active {
+  background-color: #298D5B;
+  color: #fff;
+  padding: 0 20px;
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 2px 5px;
 }

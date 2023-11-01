@@ -1,0 +1,30 @@
+#listcourse a {
+  color: #000;
+  /* Cor do texto dos links branco */
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: none;
+  /* Remover sublinhado dos links */
+  margin-bottom: 20px;
+  /* Espaçamento entre os links */
+  overflow-y: auto;
+  margin: 0 25px;
+
+}
+
+#listcourse a:hover {
+  color: #298D5B;
+  border-bottom: solid 2px;
+}
+
+#listcourse {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+#menu-menu {
+  align-items: center;
+  padding: 0 5rem 0 0;
+}

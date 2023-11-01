@@ -1,11 +1,13 @@
 import React from 'react';
 import Sidebar from '../components/Sidebar';
-import './Accout.css'
+import './global.css'
+import Menutop from '../components/menutop';
 
 
 const Account = () => {
   return (
     <div id='container'>
+        <Menutop/>
       <h2 id='title'>Minha Conta</h2>
       <div id='barra-lateral'>
         <Sidebar />

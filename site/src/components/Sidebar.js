@@ -9,7 +9,7 @@ const Sidebar = () => {
     
     <aside>
       <div id='logo'>
-          <img src={MinhaImagem} alt="Descrição da imagem" style={{height:'150px'}} />
+          <img src={MinhaImagem} alt="Descrição da imagem" style={{height:'82px', padding:'5% 2%'}} />
         </div>
       <nav >
         <NavLink to="/dashboard">

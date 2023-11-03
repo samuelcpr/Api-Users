@@ -5,17 +5,19 @@ import './style/menutop.css';
 
 const Menutop = () => {
   return (
-    <div id='menutop' style={{backgroundColor:'#F0F2F5', borderBottom:'solid 2px #E2E2E1'}}>
+    <div id='menutop' style={{ backgroundColor: '#F0F2F5', borderBottom: 'solid 2px #E2E2E1' }}>
       <div id='listcourse'>
         <div id='logo'>
-          <img src={MinhaImagem} alt="Descrição da imagem" style={{height:'150px'}} />
+          <a href='http://localhost:3000/dashboard' style={{borderBottom:'none'}}>
+            <img src={MinhaImagem} alt="Descrição da imagem" style={{ height: '90px', padding:'5% 2% 5% 0' }} />
+          </a>
         </div>
 
         <div id='menu-menu'>
-          <Link to="/Home">
+          <Link to="/dashboard">
             Inicio
           </Link>
-          <Link to="/">
+          <Link to="/Home">
             Provas
           </Link>
           <Link to="/">

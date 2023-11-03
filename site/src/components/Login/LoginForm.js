@@ -26,7 +26,7 @@ const LoginForm = () => {
       // Substitua 'URL_DA_SUA_API' pela rota correta da sua API para o login
       const response = await axios.post('http://localhost:3333/login', loginData);
       // Login bem-sucedido, redireciona para a página desejada
-      window.location.href = 'http://localhost:3000/Home'; // Substitua pela página desejada após o login
+      window.location.href = 'http://localhost:3000/dashboard'; // Substitua pela página desejada após o login
     } catch (error) {
       // Exibe mensagem de erro no login
       setMensagemErro('Credenciais inválidas. Tente novamente.');

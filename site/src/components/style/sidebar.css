@@ -3,9 +3,8 @@ aside {
   background-color: #FFFFFF;
   /* Cor de fundo preta */
   /* Cor do texto branco, para melhor contraste */
-  width: 238px;
-  /* Largura do Sidebar */
-  height: 100%;
+  width: 13%;
+  height: 123.5vh;
   /* Para preencher toda a altura da tela */
   position: absolute;
   /* Fixa o Sidebar na posição */

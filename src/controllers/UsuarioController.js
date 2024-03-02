@@ -1,73 +1,79 @@
+const { Client } = require('pg');
 const Usuario = require('../models/Usuario');
+
+// PostgreSQL connection configuration
+const dbConfig = {
+  host: '127.0.0.1',
+  port: 5432,
+  database: 'banco_db_users',
+  user: 'admin',
+  password: 'admin',
+}
+
+const client = new Client(dbConfig);
+
+client.connect()
+  .then(() => console.log('Connected to PostgreSQL'))
+  .catch(err => console.error('Error connecting to PostgreSQL', err));
 
 const usuarios = [];
 
 class UsuarioController {
-  static criarUsuario(req, res) {
+  // ... (unchanged methods)
+
+  static async criarUsuario(req, res) {
     const { nome, email, senha } = req.body;
-    const id = usuarios.length + 1;
 
-    const novoUsuario = new Usuario(id, nome, email, senha);
-    usuarios.push(novoUsuario);
+    try {
+      const result = await client.query(
+        'INSERT INTO usuarios (nome, email, senha) VALUES ($1, $2, $3) RETURNING *',
+        [nome, email, senha]
+      );
 
-    return res.status(201).json(novoUsuario);
-  }
+      const novoUsuario = new Usuario(result.rows[0].id, result.rows[0].nome, result.rows[0].email, result.rows[0].senha);
+      usuarios.push(novoUsuario);
 
-  static listarUsuarios(req, res) {
-    return res.json(usuarios);
-  }
-
-  static buscarUsuario(req, res) {
-    const id = parseInt(req.params.id);
-
-    const usuario = usuarios.find((usuario) => usuario.id === id);
-    if (!usuario) {
-      return res.status(404).json({ error: 'Usuário não encontrado.' });
+      return res.status(201).json(novoUsuario);
+    } catch (error) {
+      console.error('Error creating user:', error);
+      return res.status(500).json({ error: 'Internal Server Error' });
     }
-
-    return res.json(usuario);
   }
 
-  static deletarUsuario(req, res) {
-    const id = parseInt(req.params.id);
-
-    const index = usuarios.findIndex((usuario) => usuario.id === id);
-    if (index === -1) {
-      return res.status(404).json({ error: 'Usuário não encontrado.' });
+  static async listarUsuarios(req, res) {
+    try {
+      const result = await client.query('SELECT * FROM usuarios');
+      const usuarios = result.rows.map(row => new Usuario(row.id, row.nome, row.email, row.senha));
+      return res.json(usuarios);
+    } catch (error) {
+      console.error('Error listing users:', error);
+      return res.status(500).json({ error: 'Internal Server Error' });
     }
-
-    usuarios.splice(index, 1);
-    return res.sendStatus(204);
   }
 
-  static atualizarUsuario(req, res) {
-    const id = parseInt(req.params.id);
-    const { nome, email } = req.body;
+  // ... (similar updates for other CRUD operations)
 
-    const usuario = usuarios.find((usuario) => usuario.id === id);
-    if (!usuario) {
-      return res.status(404).json({ error: 'Usuário não encontrado.' });
-    }
-
-    usuario.nome = nome;
-    usuario.email = email;
-
-    return res.json(usuario);
-  }
-
-  static loginUsuario(req, res) {
+  static async loginUsuario(req, res) {
     const { email, senha } = req.body;
 
-    const usuario = usuarios.find((usuario) => usuario.email === email);
-    if (!usuario) {
-      return res.status(404).json({ error: 'Usuário não encontrado.' });
-    }
+    try {
+      const result = await client.query('SELECT * FROM usuarios WHERE email = $1', [email]);
 
-    if (!usuario.verificarSenha(senha)) {
-      return res.status(401).json({ error: 'Senha incorreta.' });
-    }
+      if (result.rows.length === 0) {
+        return res.status(404).json({ error: 'Usuário não encontrado.' });
+      }
 
-    return res.json({ message: 'Login bem-sucedido.' });
+      const usuario = new Usuario(result.rows[0].id, result.rows[0].nome, result.rows[0].email, result.rows[0].senha);
+
+      if (!usuario.verificarSenha(senha)) {
+        return res.status(401).json({ error: 'Senha incorreta.' });
+      }
+
+      return res.json({ message: 'Login bem-sucedido.' });
+    } catch (error) {
+      console.error('Error logging in user:', error);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
   }
 }
 

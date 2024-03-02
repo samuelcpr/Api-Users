@@ -11,28 +11,30 @@ import LoginPage from './pages/LoginPage';
 import CadastroPage from './pages/CadastroPage';
 import './App.css';
 
+
 const App = () => {
   return (
     <Router>
-       <div>
-            <Routes>
-              <Route path="/" element={<LoginPage />} />
-              <Route path="/cadastro" element={<CadastroPage />} />
-            </Routes>
-          </div>
-     
-          <main className="main-content">
-            <Routes>
-              <Route path="/Home" element={<Home />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/account" element={<Account />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/support" element={<Support />} />
-              <Route path="/course" element={<Course />} />
+      <div>
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/cadastro" element={<CadastroPage />} />
+        </Routes>
+      </div>
 
-            </Routes>
-          </main>
-       
+      <main className="main-content">
+        <Routes>
+          <Route path="/Home" element={<Home />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/support" element={<Support />} />
+          <Route path="/course" element={<Course />} />
+          
+
+        </Routes>
+      </main>
+
     </Router>
   );
 };

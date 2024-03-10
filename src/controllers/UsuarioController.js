@@ -3,11 +3,7 @@ const Usuario = require('../models/Usuario');
 
 // PostgreSQL connection configuration
 const dbConfig = {
-  host: '127.0.0.1',
-  port: 5432,
-  database: 'banco_db_users',
-  user: 'admin',
-  password: 'admin',
+ 
 }
 
 const client = new Client(dbConfig);

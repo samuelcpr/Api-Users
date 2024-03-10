@@ -15,11 +15,40 @@ const dbConfig = {
   user: 'admin',
   password: 'admin',
 }
-
 const client = new Client(dbConfig);
 
+class Usuario {
+  constructor(id, nome, email, senha) {
+    this.id = id;
+    this.nome = nome;
+    this.email = email;
+    this.senha = senha;
+  }
+
+  verificarSenha(senha) {
+    return bcrypt.compareSync(senha, this.senha);
+  }
+}
+
+const createTableQuery = `
+  CREATE TABLE IF NOT EXISTS usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL
+  );
+`;
+
+
 client.connect()
-  .then(() => console.log('Connected to PostgreSQL'))
+  .then(() => {
+    console.log('Connected to PostgreSQL');
+    // Execute a consulta para criar a tabela 'usuarios' se ela não existir
+    return client.query(createTableQuery);
+  })
+  .then(() => {
+    console.log('Table "usuarios" created or already exists');
+  })
   .catch(err => console.error('Error connecting to PostgreSQL', err));
 
 // Rota para criar um novo usuário
@@ -52,7 +81,30 @@ app.post('/usuarios', async (req, res) => {
   }
 });
 
-// ... (restante do seu código para outras rotas e lógica)
+
+app.post('/login', async (req, res) => {
+  const { email, senha } = req.body;
+
+  try {
+    const result = await client.query('SELECT * FROM usuarios WHERE email = $1', [email]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Usuário não encontrado.' });
+    }
+
+    const usuario = new Usuario(result.rows[0].id, result.rows[0].nome, result.rows[0].email, result.rows[0].senha);
+
+    if (!usuario.verificarSenha(senha)) {
+      return res.status(401).json({ error: 'Senha incorreta.' });
+    }
+
+    return res.json({ message: 'Login bem-sucedido.' });
+  } catch (error) {
+    console.error('Error logging in user:', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 
 const PORT = process.env.PORT || 3333;
 app.listen(PORT, () => {

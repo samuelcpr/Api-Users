@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+import { hashSync, compareSync } from 'bcrypt';
 
 class Usuario {
   constructor(id, nome, email, senha) {
@@ -11,13 +11,13 @@ class Usuario {
   // Método para criar o hash da senha
   criptografarSenha(senha) {
     const saltRounds = 10;
-    return bcrypt.hashSync(senha, saltRounds);
+    return hashSync(senha, saltRounds);
   }
 
   // Método para verificar se a senha fornecida corresponde ao hash da senha armazenada
   verificarSenha(senha) {
-    return bcrypt.compareSync(senha, this.senha);
+    return compareSync(senha, this.senha);
   }
 }
 
-module.exports = Usuario;
+export default Usuario;

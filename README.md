@@ -24,11 +24,12 @@ projeto/
 <h1>Dependências Necessárias:</h1>
 
 <h1>Express:</h1> Para criar o servidor e lidar com as rotas.
-<h1>Postgres:</h1> Para interagir com o MongoDB.
-jsonwebtoken: Para gerar e verificar JWTs.
+<h1>Sequelize:</h1> Uma ORM para interagir com o PostgreSQL.
+<h1>jsonwebtoken:</h1> Para gerar e verificar JWTs.
 
-<h1>Configuração do MongoDB:</h1>
-Configure uma instância do MongoDB e conecte seu aplicativo a ela. Você pode usar o Mongoose para facilitar a interação com o MongoDB.
+<h1>Configuração do PostgreSQL:</h1>
+Configure uma instância do PostgreSQL e crie um banco de dados.
+Configure as credenciais de acesso ao PostgreSQL no arquivo config.js.
 
 <h1>Configuração do JWT:</h1>
 Crie um segredo para assinar seus tokens JWT.

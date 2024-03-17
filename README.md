@@ -24,7 +24,7 @@ projeto/
 <h1>Dependências Necessárias:</h1>
 
 <h1>Express:</h1> Para criar o servidor e lidar com as rotas.
-<h1>Mongoose:</h1> Para interagir com o MongoDB.
+<h1>Postgres:</h1> Para interagir com o MongoDB.
 jsonwebtoken: Para gerar e verificar JWTs.
 
 <h1>Configuração do MongoDB:</h1>
